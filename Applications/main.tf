@@ -1,5 +1,5 @@
 module "Storage" {
- source = "../Modules/Storage/storage-account"
+ source = ""
  hns = false
  infra_encryption = false
  location = "westus"

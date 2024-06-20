@@ -87,9 +87,9 @@ jobs:
         terraform init \
         -upgrade \
         -reconfigure \
-        -backend-config="resource_group_name=raghavanrg"
-        -backend-config="storage_account_name=tfstorgtest001"
-        -backend-config="container_name=tfstate"
+        -backend-config="resource_group_name=raghavanrg" \
+        -backend-config="storage_account_name=tfstorgtest001" \
+        -backend-config="container_name=tfstate" \
         -backend-config="key=tfoidc.tfstate"
       shell: bash
       working-directory: "Applications"

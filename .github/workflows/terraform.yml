@@ -87,7 +87,7 @@ jobs:
         terraform init \
         -upgrade \
         -reconfigure \
-        -backend-config="resource_group_name=raghavanrg" \
+        -backend-config="resource_group_name=raghavan-rg" \
         -backend-config="storage_account_name=tfstorgtest001" \
         -backend-config="container_name=tfstate" \
         -backend-config="key=tfoidc.tfstate"

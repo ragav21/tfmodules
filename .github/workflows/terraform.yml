@@ -92,7 +92,7 @@ jobs:
         -backend-config="container_name=tfstate"
         -backend-config="key=tfoidc.tfstate"
       shell: bash
-      working-directory: "Appliaction"
+      working-directory: "Applications"
       env:
         ARM_ACCESS_KEY: ${{ secrets.tf_storage_key }}
 

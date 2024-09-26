@@ -30,6 +30,8 @@ jobs:
 
                 cat folders.txt
 
+                my_array=($(< folders.txt))
+
 
 
 

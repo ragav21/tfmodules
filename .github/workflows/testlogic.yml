@@ -32,6 +32,10 @@ jobs:
 
                 my_array=($(< folders.txt))
 
+                echo $my_array
+
+                
+
 
 
 

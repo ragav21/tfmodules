@@ -57,11 +57,8 @@ jobs:
             runs-on: ubuntu-latest
             if: always()
             needs: test-plan
-            strategy:
-                matrix: 
-                    apps: ${{ fromJson(needs.test-plan.outputs.environments) }}
+
             steps:
                 - name: Matrix
                   run: |
-                    echo  ${{ matrix.apps }}
-
+                    echo  ${{ fromJson(needs.test-plan.outputs.environments) }}

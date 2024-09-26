@@ -50,7 +50,7 @@ jobs:
                   fi
                 done
                 json_elements=$(IFS=,; echo "${json_array[*]}")
-                json_output="{ [$json_elements] }"
+                json_output="[$json_elements]"
                 echo "environments=$json_output" | tee -a "$GITHUB_OUTPUT"
 
     exploring:

@@ -32,6 +32,20 @@ jobs:
 
                 my_array=($(< folders.txt))
 
-                echo $my_array
+                
 
-            
+
+
+
+
+                
+
+                for item in "${my_array[@]}"; do
+                echo "$item"
+                done
+
+                if [[ -n "${my_array[*]}" ]]; then
+                    echo "my_var is an array."
+                    else
+                    echo "my_var is not an array."
+                    fi

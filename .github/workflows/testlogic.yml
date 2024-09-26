@@ -61,5 +61,5 @@ jobs:
             steps:
                 - name: Matrix
                   run: |
-                    echo ${{ needs.test-plan.outputs.environments }}
+                    echo  ${{ fromJson(needs.test-plan.outputs.environments.environments) }}
 

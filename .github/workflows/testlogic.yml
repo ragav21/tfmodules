@@ -22,7 +22,7 @@ jobs:
             - name: Get Changes
               run: |
 
-                files= git diff --name-only ${{github.event.before}} ${{github.event.after}} test-script/ | cut -d/ -f3
+                files= git diff --name-only ${{github.event.before}} ${{github.event.after}} tfmodules/test-script/ | cut -d/ -f3
 
                 echo $files
 

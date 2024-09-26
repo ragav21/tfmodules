@@ -1,0 +1,32 @@
+name: linux-test
+on:
+    push:
+        branches:
+            - main
+
+
+permissions:
+    id-token: write
+    contents: read
+
+
+jobs:
+    test-plan:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: "test-script"
+        steps:
+            - name: Get Changes
+              run: |
+
+                files= git diff --name-only ${{github.event.before}} ${{github.event.after}} test-script/ | cut -d/ -f3
+
+                echo $files
+
+                ls
+
+                for folders in $files;
+                do
+                echo $folders
+                done

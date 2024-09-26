@@ -27,7 +27,14 @@ jobs:
 
                 files= git diff --name-only ${{github.event.before}} ${{github.event.after}} test-script/ | cut -d/ -f2
 
+
                 echo $files
+
+                if [[ -n "${my_var[*]}" ]]; then
+                    echo "my_var is an array."
+                    else
+                    echo "my_var is not an array."
+                    fi
 
                 for folders in $files;
                 do

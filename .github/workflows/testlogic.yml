@@ -1,8 +1,7 @@
 name: linux-test
 on:
     push:
-        branches:
-            - main
+        branches: [ "main" ]
         paths:
             - "tfmodules/test-script"
 

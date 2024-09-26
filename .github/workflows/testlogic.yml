@@ -3,7 +3,7 @@ on:
     push:
         branches: [ "main" ]
         paths:
-            - "tfmodules/test-script/**"
+            - "test-script/**"
     workflow_dispatch:
 
 

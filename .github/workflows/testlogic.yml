@@ -24,13 +24,10 @@ jobs:
             - name: Get Changes
               run: |
 
-                ls
 
                 files= git diff --name-only ${{github.event.before}} ${{github.event.after}} test-script/ | cut -d/ -f3
 
                 echo $files
-
-                ls
 
                 for folders in $files;
                 do

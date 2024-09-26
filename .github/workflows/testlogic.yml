@@ -50,16 +50,18 @@ jobs:
                   fi
                 done
                 json_elements=$(IFS=,; echo "${json_array[*]}")
-                json_output="{ \"environments\": [$json_elements] }"
+                json_output="{ [$json_elements] }"
                 echo "environments=$json_output" | tee -a "$GITHUB_OUTPUT"
 
     exploring:
             runs-on: ubuntu-latest
             if: always()
             needs: test-plan
-
+            strategy:
+                matrix: 
+                    apps: ${{ fromJson(needs.test-plan.outputs.environments) }}
             steps:
                 - name: Matrix
                   run: |
-                    echo  ${{ fromJson(needs.test-plan.outputs.environments.environments) }}
+                    echo  ${{ matrix.apps }}
 

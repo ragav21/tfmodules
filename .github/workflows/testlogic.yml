@@ -30,7 +30,7 @@ jobs:
 
                 echo $files
 
-                folders= $(ls)
+                folders= @(ls)
 
                 echo $folders
 

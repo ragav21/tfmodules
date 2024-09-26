@@ -15,9 +15,7 @@ permissions:
 jobs:
     test-plan:
         runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: "test-script"
+
         steps:
             - name: "check-out"
               uses: actions/checkout@v4
@@ -25,6 +23,8 @@ jobs:
                 fetch-depth: 2
             - name: Get Changes
               run: |
+
+                ls
 
                 files= git diff --name-only ${{github.event.before}} ${{github.event.after}} test-script/ | cut -d/ -f3
 

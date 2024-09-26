@@ -25,14 +25,12 @@ jobs:
               run: |
 
 
-                files= git diff --name-only ${{github.event.before}} ${{github.event.after}} test-script/ | cut -d/ -f2
+                git diff --name-only ${{github.event.before}} ${{github.event.after}} test-script/ | cut -d/ -f2 > folders.txt
 
 
-                echo $files
+                cat folders.txt
 
-                folders= @(ls)
 
-                echo $folders
 
 
 

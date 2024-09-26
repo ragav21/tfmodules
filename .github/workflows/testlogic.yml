@@ -59,7 +59,7 @@ jobs:
             needs: test-plan
             strategy:
                 matrix: 
-                    apps: ${{ needs.test-plan.outputs.environments }}
+                    apps: ${{ fromJson(needs.test-plan.outputs.environments) }}
 
 
             steps:

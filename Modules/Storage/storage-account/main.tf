@@ -20,7 +20,6 @@ resource "azurerm_storage_account" "storeacc" {
   account_kind              = "StorageV2"
   account_tier              = "Standard"
   account_replication_type  = "LRS"
-  enable_https_traffic_only = true
   is_hns_enabled            = var.hns
   min_tls_version           = "TLS1_2"
   public_network_access_enabled = false

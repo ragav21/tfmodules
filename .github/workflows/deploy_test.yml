@@ -2,7 +2,7 @@ name: 'DeployTerraform'
 
 on:
   push:
-    branches: [ "dev_branch" ]
+    branches: "dev_branch"
     paths: "tfmodules/Applications/**"
   pull_request:
   workflow_dispatch:

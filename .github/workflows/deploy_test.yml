@@ -1,0 +1,54 @@
+name: 'DeployTerraform'
+
+on:
+  push:
+    branches: "dev_branch"
+    paths: "tfmodules/Applications/**"
+  pull_request:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: development
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: |
+        terraform init \
+        -upgrade \
+        -reconfigure \
+        -backend-config="resource_group_name=raghavan-rg" \
+        -backend-config="storage_account_name=tfstorgtest001" \
+        -backend-config="container_name=tfstate" \
+        -backend-config="key=tfoidc.tfstate"
+      shell: bash
+      working-directory: "Applications"
+      env:
+        ARM_ACCESS_KEY: ${{ secrets.tf_storage_key }}

@@ -1,0 +1,68 @@
+name: linux-test
+on:
+    push:
+        branches: [ "main" ]
+        paths:
+            - "test-script/**"
+    workflow_dispatch:
+
+
+permissions:
+    id-token: write
+    contents: read
+
+
+jobs:
+    test-plan:
+        runs-on: ubuntu-latest
+        outputs:
+            environments: ${{ steps.get-changes.outputs.environments }}
+
+        steps:
+            - name: "check-out"
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 2
+            - name: get-changes
+              id: get-changes
+
+              run: |
+
+
+                git diff --name-only ${{github.event.before}} ${{github.event.after}} test-script/ | cut -d/ -f2 > folders.txt
+
+
+                cat folders.txt
+
+                my_array=($(< folders.txt))
+
+    
+
+                for item in "${my_array[@]}"; do
+                echo "$item"
+                done
+
+                excluded_directories=("network-hub")
+                json_array=()
+                for dir in "${my_array[@]}"; do
+                  if [[ ! " ${excluded_directories[@]} " =~ " $dir " ]]; then
+                    json_array+=("\"$dir\"")
+                  fi
+                done
+                json_elements=$(IFS=,; echo "${json_array[*]}")
+                json_output="[$json_elements]"
+                echo "environments=$json_output" | tee -a "$GITHUB_OUTPUT"
+
+    exploring:
+            runs-on: ubuntu-latest
+            if: always()
+            needs: test-plan
+            strategy:
+                matrix: 
+                    apps: ${{ fromJson(needs.test-plan.outputs.environments) }}
+
+
+            steps:
+                - name: Matrix
+                  run: |
+                    echo  ${{ matrix.apps }}
